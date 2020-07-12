@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>MacOS配置PHP 环境 -- Apache | Today . 🍎</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Today . 🍎&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Today . 🍎&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">MacOS配置PHP 环境 -- Apache</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">December 2, 2013&nbsp;&nbsp;15:30:16</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/PHP/">PHP</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <ul>
+<li>启动 Apache</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 开启Apache服务  </span><br><span class="line">sudo apachectl start  </span><br><span class="line">&#x2F;&#x2F; 查看Apache版本号  </span><br><span class="line">sudo apachectl -v  </span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;重新启动</span><br><span class="line">sudo apachectl restart</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>PHP目录</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;目录</span><br><span class="line">&#x2F;etc&#x2F;apache2&#x2F; </span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;关键文件</span><br><span class="line">httpd.conf</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;取消注释</span><br><span class="line">LoadModule php5_module libexec&#x2F;apache2&#x2F;libphp5.so  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;最原始的网站根目录</span><br><span class="line">&#x2F;Library&#x2F;WebServer&#x2F;Documents&#x2F;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加端口</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> &#x2F;etc&#x2F;apache2&#x2F;httpd.conf</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;这个必须给加上哦.....  </span><br><span class="line">Listen 82</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>设置虚拟主机</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;在终端运行</span><br><span class="line">    sudo vi &#x2F;etc&#x2F;apache2&#x2F;httpd.conf</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;去掉前面的# 意思就是开启</span><br><span class="line">#Include &#x2F;private&#x2F;etc&#x2F;apache2&#x2F;extra&#x2F;httpd-vhosts.conf</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;重启Apache</span><br><span class="line">sudo apachectl restart</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;编辑以下文件</span><br><span class="line">sudo vi &#x2F;etc&#x2F;apache2&#x2F;extra&#x2F;httpd-vhosts.conf</span><br><span class="line"></span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    DocumentRoot &quot;&#x2F;Users&#x2F;[用户名]&#x2F;Sites&quot;</span><br><span class="line">    ServerName sites</span><br><span class="line">    ErrorLog &quot;&#x2F;private&#x2F;var&#x2F;log&#x2F;apache2&#x2F;sites-error_log&quot;</span><br><span class="line">    CustomLog &quot;&#x2F;private&#x2F;var&#x2F;log&#x2F;apache2&#x2F;sites-access_log&quot; common</span><br><span class="line">&lt;&#x2F;VirtualHost&gt; </span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;修改 host</span><br><span class="line">sudo vi &#x2F;etc&#x2F;hosts</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;打开hosts配置文件</span><br><span class="line">加入”127.0.0.1 sites“，</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>出现了故障</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;You don&#39;t have permission to access &#x2F;iosfonts on this server.</span><br><span class="line"></span><br><span class="line"> 怎么解决呢?</span><br><span class="line"> &#x2F;etc&#x2F;apache2&#x2F;httpd.conf</span><br><span class="line"> </span><br><span class="line"> &lt;Directory &#x2F;&gt;</span><br><span class="line">    Options FollowSymLinks</span><br><span class="line">    AllowOverride None</span><br><span class="line">    Order deny,allow</span><br><span class="line">    Deny from all</span><br><span class="line">&lt;&#x2F;Directory&gt;</span><br><span class="line"></span><br><span class="line">Deny .... 是不对滴  &#x3D;&#x3D;&#x3D;&gt;  allow</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;给换了</span><br><span class="line"></span><br><span class="line">&lt;Directory &#x2F;&gt;</span><br><span class="line">    Options FollowSymLinks</span><br><span class="line">    AllowOverride None</span><br><span class="line">    Order deny,allow</span><br><span class="line">    allow from all</span><br><span class="line">&lt;&#x2F;Directory&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://yoursite.com/2013/12/02/mac%E9%85%8D%E7%BD%AEphp%E7%8E%AF%E5%A2%83/">http://yoursite.com/2013/12/02/mac%E9%85%8D%E7%BD%AEphp%E7%8E%AF%E5%A2%83/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Today in <strong>DESTINY<strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/macos/"># macos</a>
+                    
+                        <a href="/tags/php/"># php</a>
+                    
+                        <a href="/tags/apache/"># apache</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/09/03/%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E8%B7%9F%E8%BF%9C%E7%A8%8B%E6%AE%8B%E9%85%B7%E6%96%87%E4%BB%B6%E6%9C%89%E5%86%B2%E7%AA%81/">The following untracked working tree files would be overwritten by merge</a>
+            
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

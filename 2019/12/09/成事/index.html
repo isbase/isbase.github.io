@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="John Doe">
+
+
+
+
+
+<title>成事 | Today . 🍎</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Today . 🍎&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Today . 🍎&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">成事</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">December 9, 2019&nbsp;&nbsp;0:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/book/">book</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="人性探索-amp-抉择"><a href="#人性探索-amp-抉择" class="headerlink" title="人性探索&amp;抉择"></a>人性探索&amp;抉择</h3><ul>
+<li><p>接纳人性 理解人性</p>
+<ul>
+<li>严于律己,宽于待人</li>
+<li>不嫉妒,不贪心,不急于求成,踏实做事</li>
+<li>多去理解别人,少去批判别人</li>
+</ul>
+</li>
+<li><p>化解和利用人性</p>
+<ul>
+<li>学会推功揽过</li>
+<li>尽量别患得患失</li>
+<li>大家都喜欢听赞美的语言</li>
+</ul>
+</li>
+<li><p>选择</p>
+<ul>
+<li>集中精力做事,某事在人,,成事在天</li>
+<li>着眼于大局,专心于小事,毕竟方向很重要</li>
+<li>关于生活态度<ol>
+<li>过中等偏下生活,享受上等智慧</li>
+<li>量入为出,经济方面也需要多反思</li>
+<li>自己做事,少干打肿脸充胖子的事</li>
+<li>尽量去感受生活中的小快乐,有时间去记录一下.</li>
+<li>不能只看贼吃肉,不见贼挨打.</li>
+<li>抓住目标,付诸于努力,坚持,进步</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="修身养性"><a href="#修身养性" class="headerlink" title="修身养性"></a>修身养性</h3><ul>
+<li>身体是我们革命的本钱,注意健康,注意锻炼,如果太累了就不要勉强自己.但还是要有计划.</li>
+<li>此心安住是吾乡.</li>
+<li>不做亏心事,心安理得的去生活</li>
+<li>看书,比惨,学会满足,不停止进步</li>
+<li>知耻辱,讲信用,不焦躁</li>
+<li>不发牢骚,不抱怨,管住嘴,有底线.能从容,常反思</li>
+<li>定目标埋头干</li>
+<li>学会承担责任</li>
+<li>学会谨慎,勤劳,千万不要耍小聪明</li>
+<li>找准方向持续努力</li>
+</ul>
+<h3 id="态度"><a href="#态度" class="headerlink" title="态度"></a>态度</h3><ul>
+<li>专注,认真,坚持,耐心,这就要克制自己急功近利的心情,不要见异思迁,最好开始有想法的时候,把自己的想法行动策略就大致的规划一下,写出来,有改动也加以修改,就知道都经历了什么.</li>
+<li>每次都专心致做一件事,给自己定一些小目标,但是不要让自己永远躺着舒适区.</li>
+<li>认真做事,认真待人.持之以恒,经常反省审视自己,不要做一个酒囊饭袋.</li>
+<li>不要呈口舌之快,有耐心,虚怀若谷,消除偏见.理解人性.</li>
+</ul>
+<h3 id="如何当一个管理者"><a href="#如何当一个管理者" class="headerlink" title="如何当一个管理者."></a>如何当一个管理者.</h3><ul>
+<li>对自己负责,以身作则,关键时刻去解决问题,反思都留在每天固定的时间.</li>
+<li>有全局观,大处着眼,小处着手,不要就知道画饼,要有全局的进度把控,实战能力,推功揽过,承担责任</li>
+<li>知人善任,懂得做事的逻辑跟规则</li>
+<li>激励员工,成就员工. eg曾国藩跟左宗棠的区别.</li>
+<li>跟团队打成一片,有亲和力,能领到,能带走,能有信服力.为团队着想,冲锋陷阵.说白了保护好你的队友.</li>
+</ul>
+<h3 id="管理者不应该做的事情"><a href="#管理者不应该做的事情" class="headerlink" title="管理者不应该做的事情"></a>管理者不应该做的事情</h3><ul>
+<li>不要事无巨细,知道你的能力优点,善于用人.少去干涉.</li>
+<li>一碗水端平了,不要破坏团队氛围,一视同仁.</li>
+<li>不要老冷着脸,学会控制肌肉表情.</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>John Doe</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://yoursite.com/2019/12/09/%E6%88%90%E4%BA%8B/">http://yoursite.com/2019/12/09/%E6%88%90%E4%BA%8B/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Today in <strong>DESTINY<strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/book/"># book</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/12/23/ts%E8%BD%ACmp4/">Mac os TS 转 MP4</a>
+            
+            
+            <a class="next" rel="next" href="/2019/12/03/tpnginx/">Think PHP Nginx配置</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
