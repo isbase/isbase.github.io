@@ -12,7 +12,7 @@
 
 
 
-<title>最近用一个 vue 框架出现的问题 | Today . 🍎</title>
+<title>迫于暂时没有jenkins,弄一个乞丐版的自动部署 | Today . 🍎</title>
 
 
 
@@ -211,7 +211,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">最近用一个 vue 框架出现的问题</h1>
+            <h1 class="post-title">迫于暂时没有jenkins,弄一个乞丐版的自动部署</h1>
             
                 <div class="post-meta">
                     
@@ -220,14 +220,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">May 20, 2020&nbsp;&nbsp;0:00:00</a>
+                        Date: <a href="#">June 1, 2020&nbsp;&nbsp;0:00:00</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/html-css-h5/">html,css,h5</a>
+                                <a href="/categories/wechat-h5/">wechat,h5</a>
                             
                         </span>
                     
@@ -236,18 +236,26 @@
         </header>
 
         <div class="post-content">
-            <h4 id="一-Failed-to-resolve-async-component-default-Error-Cannot-find-module"><a href="#一-Failed-to-resolve-async-component-default-Error-Cannot-find-module" class="headerlink" title="一 : Failed to resolve async component default: Error: Cannot find module"></a>一 : Failed to resolve async component default: Error: Cannot find module</h4><p>今天接到一个项目报这个错.</p>
-<ul>
-<li>vue-router.esm.js:16 [vue-router] Failed to resolve async component default: Error: Cannot find module ‘@/views/report/rank/index’</li>
+            <ul>
+<li>一眨眼两个多小时,时间就这么过去,还想赶紧弄完还想出门赴约喝酒.</li>
+<li>原计划实现自动部署,或者手动部署的思路就是利用webhook拉取代码.</li>
+<li>之后再用定时任务跑一个 sheel 脚本build 之后打包 , 就可以实现 乞丐版jenkins的功能了. </li>
+<li>之后错误不断,跟本上还是 node 版本不一致导致的.切换版本时还遇到一些问题,也不经常操作的原因吧.</li>
 </ul>
-<p>解决办法:</p>
-<ol>
-<li>安装syntax-dynamic-import依赖。</li>
-<li>把store/modules/premission.js中的<br>return () =&gt; import(<code>@/views/${view}</code>)改成<br>return resolve =&gt; require([<code>@/views/${view}</code>], resolve)就可以了</li>
-</ol>
-<p>先选择第一种吧. </p>
-<h4 id="二-TypeError-mkdirp-is-not-a-function"><a href="#二-TypeError-mkdirp-is-not-a-function" class="headerlink" title="二:  TypeError: mkdirp is not a function"></a>二:  TypeError: mkdirp is not a function</h4><p>我本地是用 n 来管理 node 版本的.<br>最后解决办法是:<br> sudo n 切换了 node 版本. 之后错误就消失了.</p>
+<h3 id="一-关于服务器Nodejs-版本管理"><a href="#一-关于服务器Nodejs-版本管理" class="headerlink" title="一 . 关于服务器Nodejs 版本管理"></a>一 . 关于服务器Nodejs 版本管理</h3><ul>
+<li><p>除非闲的不要轻易尝试自己一步步来,没事卵用,我只想快速解决问题.</p>
+</li>
+<li><p>常见管理版本的软件 nvm &amp;&amp; n . 我开始的时候用 n 切换版本没效果, 后来发现本地安装有 nvm,就是这个影响了,n的使用, 正好那就用nvm吧.</p>
+</li>
+<li><p>区别也可以自己百度下, 总的来说，nvm有点类似于 Python 的 virtualenv 或者 Ruby 的 rvm，每个node版本的模块都会被安装在各自版本的沙箱里面（因此切换版本后模块需重新安装）,我是因为刚开始用 n 有点问题,之后发现我用服务器环境有 nvm 所以正好省事.</p>
+</li>
+<li><p>之后就直接了<code>nvm install 11.10.0</code> ,发现直接改变了 node 版本.</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Downloading and installing node v11.10.0...</span><br><span class="line">Downloading https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz...</span><br><span class="line">\######################################################################## 100.0%</span><br><span class="line">Computing checksum with sha256sum</span><br><span class="line">Checksums matched!</span><br><span class="line">Now using node v11.10.0 (npm v6.7.0)</span><br><span class="line">Creating default alias: default -&gt; 11.10.0 (-&gt; v11.10.0)</span><br><span class="line">[root@ckd02 node-v11.0.0]# node -v</span><br><span class="line">v11.10.0</span><br></pre></td></tr></table></figure>
 
+<p>  如果不好使, 就nvm use XXX</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 就这么完事了.</span><br><span class="line">- 接下来就是 npm install 一遍. 之后打包压缩, 移动,覆盖解压.</span><br><span class="line">- 这个操作放在一个定时任务里就好了,我图省事,其实一直都是用宝塔操作的. </span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;&#96;shell</span><br><span class="line">cd &#x2F;www&#x2F;wwwroot&#x2F;mobile_code&#x2F;xxxxx</span><br><span class="line">npm run build</span><br><span class="line">cd dist</span><br><span class="line">tar -zcvf dist.tar.gz *</span><br><span class="line">echo &quot;打包数据成功!&quot;</span><br><span class="line">rm -rf &#x2F;www&#x2F;wwwroot&#x2F;h5.xxxx.com&#x2F;*</span><br><span class="line">mv -f .&#x2F;dist.tar.gz &#x2F;www&#x2F;wwwroot&#x2F;h5.xxxxx.com&#x2F;</span><br><span class="line">cd &#x2F;www&#x2F;wwwroot&#x2F;h5.xxxxx.com&#x2F; &amp;&amp; tar -zxvf dist.tar.gz</span><br><span class="line">echo &quot;解压数据成功!&quot;</span><br></pre></td></tr></table></figure>
         </div>
 
         
@@ -261,7 +269,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://yoursite.com/2020/05/20/bug/">http://yoursite.com/2020/05/20/bug/</a></span>
+                        <span><a href="http://yoursite.com/2020/06/01/%E4%B9%9E%E4%B8%90%E7%89%88%E7%9A%84%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">http://yoursite.com/2020/06/01/%E4%B9%9E%E4%B8%90%E7%89%88%E7%9A%84%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</a></span>
                     </p>
                 
                 
@@ -285,11 +293,9 @@
                 <span class="tag">
                     
                     
+                        <a href="/tags/wechat/"># wechat</a>
+                    
                         <a href="/tags/ht5/"># ht5</a>
-                    
-                        <a href="/tags/html/"># html</a>
-                    
-                        <a href="/tags/css/"># css</a>
                     
                         
                 </span>
@@ -302,10 +308,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/06/01/%E4%B9%9E%E4%B8%90%E7%89%88%E7%9A%84%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">迫于暂时没有jenkins,弄一个乞丐版的自动部署</a>
+                <a class="prev" rel="prev" href="/2020/06/01/php%E6%8B%93%E5%B1%95%E5%AE%89%E8%A3%85phalcon/">需要些 Phalcon 环境,的时候一些拓展问题.</a>
             
             
-            <a class="next" rel="next" href="/2020/05/10/vue%20%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B9%8B%E4%BA%8C/">vue项目服务器自动部署</a>
+            <a class="next" rel="next" href="/2020/05/20/bug/">最近用一个 vue 框架出现的问题</a>
             
         </section>
 
