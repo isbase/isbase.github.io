@@ -152,9 +152,7 @@
             <h1 class="post-title">关于Python处理excel的问题</h1>
             
                 <div class="post-meta">
-                    
-                        Author: <a itemprop="author" rel="author" href="/">John Doe</a>
-                    
+                    Author: Today
 
                     
                         <span class="post-time">
@@ -185,34 +183,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Excel</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, file)</span>:</span></span><br><span class="line">        self.file = file</span><br><span class="line">        self.wb = load_workbook(self.file)</span><br><span class="line">        sheets = self.wb.get_sheet_names()</span><br><span class="line">        self.sheet = sheets[<span class="number">0</span>]</span><br><span class="line">        self.ws = self.wb[self.sheet]</span><br><span class="line"></span><br><span class="line">        print(self.ws)</span><br><span class="line">        print(self.sheet)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取表格的总行数和总列数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getRowsClosNum</span><span class="params">(self)</span>:</span></span><br><span class="line">        rows = self.ws.max_row</span><br><span class="line">        columns = self.ws.max_column</span><br><span class="line">        <span class="keyword">return</span> rows, columns</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取某个单元格的值</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getCellValue</span><span class="params">(self, row, column)</span>:</span></span><br><span class="line">        cellvalue = self.ws.cell(row=row, column=column).value</span><br><span class="line">        <span class="keyword">return</span> cellvalue</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取某列的所有值</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getColValues</span><span class="params">(self, column)</span>:</span></span><br><span class="line">        rows = self.ws.max_row</span><br><span class="line">        columndata = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, rows + <span class="number">1</span>):</span><br><span class="line">            cellvalue = self.ws.cell(row=i, column=column).value</span><br><span class="line">            columndata.append(cellvalue)</span><br><span class="line">        <span class="keyword">return</span> columndata</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取某行所有值</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getRowValues</span><span class="params">(self, row)</span>:</span></span><br><span class="line">        columns = self.ws.max_column</span><br><span class="line">        rowdata = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, columns + <span class="number">1</span>):</span><br><span class="line">            cellvalue = self.ws.cell(row=row, column=i).value</span><br><span class="line">            rowdata.append(cellvalue)</span><br><span class="line">        <span class="keyword">return</span> rowdata</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置某个单元格的值</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setCellValue</span><span class="params">(self, row, colunm, cellvalue)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.ws.cell(row=row, column=colunm).value = cellvalue</span><br><span class="line">            self.wb.save(self.file)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            self.ws.cell(row=row, column=colunm).value = <span class="string">"writefail"</span></span><br><span class="line">            self.wb.save(self.file)</span><br></pre></td></tr></table></figure>
         </div>
 
-        
-            <section class="post-copyright">
-                
-                    <p class="copyright-item">
-                        <span>Author:</span>
-                        <span>John Doe</span>
-                    </p>
-                
-                
-                    <p class="copyright-item">
-                        <span>Permalink:</span>
-                        <span><a href="http://yoursite.com/2019/09/03/pythonopenpyxl%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87/">http://yoursite.com/2019/09/03/pythonopenpyxl%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87/</a></span>
-                    </p>
-                
-                
-                    <p class="copyright-item">
-                        <span>License:</span>
-                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
-                    </p>
-                
-                
-                     <p class="copyright-item">
-                         <span>Slogan:</span>
-                         <span>Today in <strong>DESTINY<strong>?</span>
-                     </p>
-                
-
-            </section>
         
         <section class="post-tags">
             <div>
@@ -251,7 +221,7 @@
         </div>
         <footer id="footer" class="footer">
     <div class="copyright">
-        <span>© John Doe | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+       <span>Hello World</span>
     </div>
 </footer>
 
